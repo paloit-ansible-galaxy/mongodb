@@ -1,0 +1,4 @@
+---
+# Handler for mongod
+- name: restart mongodb
+  service: name=mongod state=restarted

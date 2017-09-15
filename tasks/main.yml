@@ -1,0 +1,13 @@
+---
+# This Playbook runs all the common plays in the deployment
+- name: Create the repository for mongodb
+  copy: src=mongodb-org.repo.j2 dest=/etc/yum.repos.d/mongodb-org.repo
+
+- name: Create the mongod user
+  user: name=mongod comment="MongoD"
+
+- name: Install the mongodb package
+  yum: name={{ item }} state=installed
+  with_items:
+   - mongodb-org
+  notify: restart mongodb
